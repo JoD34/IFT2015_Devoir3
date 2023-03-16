@@ -1,5 +1,5 @@
 public class MinPriorityQueueUsingBST {
-
+/*
     private Node root;
 
     private static class Node {
@@ -65,5 +65,5 @@ public class MinPriorityQueueUsingBST {
 		// END OF YOUR CODE HERE
 
     }
-
+*/
 }
