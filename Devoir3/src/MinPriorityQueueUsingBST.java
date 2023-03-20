@@ -105,8 +105,6 @@ public class MinPriorityQueueUsingBST {
                 v.setLeft(u.getLeft());
                 u.getLeft().setP(v);
             }
-            if (u == u.getP().getLeft()) u.getP().setLeft(v);
-            else u.getP().setRight(v);
         }
 
         else{
@@ -115,10 +113,9 @@ public class MinPriorityQueueUsingBST {
                 v.setRight(u.getRight());
                 u.getRight().setP(v);
             }
-            if (u == u.getP().getLeft()) u.getP().setLeft(v);
-            else u.getP().setRight(v);
-
         }
+        if (u == u.getP().getLeft()) u.getP().setLeft(v);
+        else u.getP().setRight(v);
         updateMinNode(getRoot());
     }
 

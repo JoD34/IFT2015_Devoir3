@@ -53,7 +53,7 @@ public class Main {
             System.out.println(extract.getKey());
             a.printPreorder(a.getRoot());
             System.out.println();
-            System.out.println("-");
+            System.out.println("_________________________");
         }
 
     }
