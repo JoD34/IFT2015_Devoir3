@@ -21,10 +21,10 @@ public class MinPriorityQueueUsingBST {
         public Node getLeft() {return left;}
         public Node getRight() {return right;}
         public Node getP() {return p;}
+        public Node getMin() {return min;}
+        public void setKey(int key) {this.key = key;}
 
-        public void setKey(int key) {
-            this.key = key;
-        }
+        public int getKey() {return key;}
 
         public void addLeft(Node left) {
             setLeft(left);
@@ -49,6 +49,8 @@ public class MinPriorityQueueUsingBST {
     }
 
     public Node getRoot() {return root;}
+
+    public void setRoot(Node root) {this.root = root;}
 
     public void setRootKey(int key) {
         this.root = new Node(key,key);
@@ -122,9 +124,12 @@ public class MinPriorityQueueUsingBST {
     }
 
     public Node extractMinEfficient(Node z) {
-        Node Head= new Node(1,1);
-
-
-        return Head;
+        //Node Head= new Node(1,1); What is this for?
+        Node min = z.getMin();
+        if (min.getP() == null) setRoot(z.getRight().getMin());
+        else if (min.getRight() != null) transplant(z, z.getRight());
+        else  min.getP().setLeft(null);
+        updateMinNode(getRoot());
+        return min;
     }
 }

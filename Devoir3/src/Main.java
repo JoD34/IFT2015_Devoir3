@@ -47,6 +47,11 @@ public class Main {
         a.transplant(found2, found2.getLeft());
         a.printPreorder(a.getRoot());
 
+        System.out.println();
+        MinPriorityQueueUsingBST.Node extract = a.extractMinEfficient(a.getRoot());
+        System.out.println(extract.getKey());
+        a.printPreorder(a.getRoot());
+
     }
     public static void addNodes(int[] listVal, Node list){
         for (int i = 1; i < listVal.length;i++){
