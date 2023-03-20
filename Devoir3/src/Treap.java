@@ -3,6 +3,7 @@ import java.util.Random;
 // A Treap Node
 class TreapNode
 {
+	/*
 	//
 	int data;
 	int priority;
@@ -32,7 +33,7 @@ class Treap
 		// set a new root
 		return R;
 	}
-/*
+
 
 	public static TreapNode rotateRight(TreapNode root)
 	{
@@ -87,7 +88,5 @@ class Treap
 
 		return root;
 	}
-
 */
-
 }

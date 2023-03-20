@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) {
         // Test pour le fichier Merge.java
-        int[] listVal1 = {1,5,7},listVal3 = {2,3,6,9}, listVal2 = {4,8,10};
-        Node[] listNodes= new Node[3];
+        int[] listVal1 = {1,5,7},listVal3 = {2,3,6,9}, listVal2 = {4,8,10}, listVal4={11,13,24};
+        Node[] listNodes= new Node[4];
         Merge m = new Merge();
 
         // Générer trois listes chaînées de noeuds
@@ -15,7 +15,11 @@ public class Main {
         Node list3 = new Node(listVal3[0]);
         listNodes[2] = list3;
         addNodes(listVal3,list3);
-
+/*
+        Node list4 = new Node(listVal1[0]);
+        listNodes[3] = list4;
+        addNodes(listVal1,list4);
+*/
         // Trier les listes chaînées
         Node merged = m.mergeKLists(listNodes);
 
@@ -26,6 +30,22 @@ public class Main {
             n = n.next;
         }
 
+        int[] listKeys ={10,5,7,6,3,2,8,9,15,13,12,14,17,16,18};
+        MinPriorityQueueUsingBST a = new MinPriorityQueueUsingBST();
+        a.setRootKey(listKeys[0]);
+        for (int i=1;i<listKeys.length;i++)a.addMeBaby(listKeys[i],a.getRoot());
+        a.printPreorder(a.getRoot());
+        System.out.println();
+
+        MinPriorityQueueUsingBST.Node found = a.getRoot().findMeBaby(7);
+        a.transplant(found, found.getRight());
+        a.printPreorder(a.getRoot());
+
+        System.out.println();
+
+        MinPriorityQueueUsingBST.Node found2 = a.getRoot().findMeBaby(13);
+        a.transplant(found2, found2.getLeft());
+        a.printPreorder(a.getRoot());
 
     }
     public static void addNodes(int[] listVal, Node list){

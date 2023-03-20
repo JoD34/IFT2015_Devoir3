@@ -16,32 +16,31 @@ class Node
 
 class Merge {
 	/**
-	 * Fusionner 'k' liste(s) chaînée(s) par l'entremise de l'ADS monceau minimum.
+	 * Fusionner 'k' liste(s) chaînée(s) par l'entremise d'un monceau minimum.
 	 *
-	 * @param lists list contenant des Noeuds à classer.
+	 * @param lists list contenant des noeuds à classer.
 	 * @return (Node) premier noeud de la list nouvellement fusionnée.
 	 */
 	public static Node mergeKLists(Node[] lists) {
 		// Initialisation des variables
-		PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> ((Node) a).data));
+		PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> (a).data));
 		Node head = null, last = null;
 
 		// Ajouter les premiers éléments des listes chaînées au monceau
-		for (Node i : lists) pq.offer(i);
+		for (Node i : lists) if(i!=null) pq.offer(i);
 
 		// Initier le premier noeud de la liste fusionnée.
 		if (!pq.isEmpty()) {
 			head = last = pq.poll();
-			if(last.next != null) pq.add(last.next);
+			if(last.next != null) pq.offer(last.next);
 		}
 
 		//Ajouter les noeuds subséquents
 		while (!pq.isEmpty()) {
 			last.next = pq.poll();
-			if (last.next.next!=null) pq.add(last.next.next);
+			if (last.next.next!=null) pq.offer(last.next.next);
 			last = last.next;
 		}
-
 		return head;
 	}
 }
