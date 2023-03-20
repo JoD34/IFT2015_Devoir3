@@ -26,6 +26,10 @@ public class MinPriorityQueueUsingBST {
 
         public int getKey() {return key;}
 
+        public void setMin(Node min) {
+            this.min = min;
+        }
+
         public void addLeft(Node left) {
             setLeft(left);
             getLeft().setP(this);
@@ -83,9 +87,9 @@ public class MinPriorityQueueUsingBST {
      * @param z Arbre à partir duquel on cherche mettre à jour les min
      */
     protected void updateMinNode(Node z) {
-        if (z.left!= null) updateMinNode(z.left);
-        if (z.right!= null) updateMinNode(z.right);
-        z.min = min(z);
+        if (z.getLeft()!= null) updateMinNode(z.getLeft());
+        if (z.getRight()!= null) updateMinNode(z.getRight());
+        z.setMin(min(z));
     }
 
     /**
@@ -94,42 +98,55 @@ public class MinPriorityQueueUsingBST {
      * @param v noeud devant être déplacé sous le parent de u
      */
     public void transplant(Node u, Node v) {
+        v.setP(u.getP());
         if (v == u.getRight()) {
             if (u.getLeft() != null) {
-                while (v.getLeft() != null) v = v.getLeft();
+                while (v.getLeft() != null) v = v.getLeft(); // Is this necessary ?
                 v.setLeft(u.getLeft());
+                u.getLeft().setP(v);
             }
-            v.setP(u.getP());
-            u.getP().setRight(v);
+            if (u == u.getP().getLeft()) u.getP().setLeft(v);
+            else u.getP().setRight(v);
         }
 
         else{
             if (u.getRight() != null) {
-                while (v.getRight() != null) v = v.getRight();
+                while (v.getRight() != null) v = v.getRight(); // Is this necessary ?
                 v.setRight(u.getRight());
+                u.getRight().setP(v);
             }
-            v.setP(u.getP());
-            u.getP().setLeft(v);
+            if (u == u.getP().getLeft()) u.getP().setLeft(v);
+            else u.getP().setRight(v);
+
         }
         updateMinNode(getRoot());
     }
 
+    /**
+     * Afficher l'arbre binaire de façon préfixée
+     * @param node Noeud de départ de l'impression.
+     */
     void printPreorder(Node node)
     {
         if (node == null)
             return;
-        System.out.print(node.key + " ");
-        printPreorder(node.left);
-        printPreorder(node.right);
+        System.out.print(node.getKey() + " ");
+        printPreorder(node.getLeft());
+        printPreorder(node.getRight());
     }
 
     public Node extractMinEfficient(Node z) {
         //Node Head= new Node(1,1); What is this for?
+        if (z == null) return z;
         Node min = z.getMin();
-        if (min.getP() == null) setRoot(z.getRight().getMin());
-        else if (min.getRight() != null) transplant(z, z.getRight());
-        else  min.getP().setLeft(null);
-        updateMinNode(getRoot());
+        if (min.getP() == null) {
+            if (getRoot().getRight() == null) {setRoot(null);}
+            else {setRoot(getRoot().getRight());
+            getRoot().setP(null);}
+        }
+        else if (min.getRight() != null) transplant(min, min.getRight());
+        else min.getP().setLeft(null);
+        if(getRoot() != null) updateMinNode(getRoot());
         return min;
     }
 }

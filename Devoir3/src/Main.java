@@ -47,10 +47,14 @@ public class Main {
         a.transplant(found2, found2.getLeft());
         a.printPreorder(a.getRoot());
 
-        System.out.println();
-        MinPriorityQueueUsingBST.Node extract = a.extractMinEfficient(a.getRoot());
-        System.out.println(extract.getKey());
-        a.printPreorder(a.getRoot());
+
+        while (a.getRoot() !=null){
+            MinPriorityQueueUsingBST.Node extract = a.extractMinEfficient(a.getRoot());
+            System.out.println(extract.getKey());
+            a.printPreorder(a.getRoot());
+            System.out.println();
+            System.out.println("-");
+        }
 
     }
     public static void addNodes(int[] listVal, Node list){
