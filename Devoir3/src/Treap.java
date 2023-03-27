@@ -121,7 +121,7 @@ class Treap {
                 root = rotateLeft(root);
                 root.left = deleteNode(root.left, key);
 
-            } else if (root.right.priority < root.left.priority) {
+            } else {
                 root = rotateRight(root);
                 root.right = deleteNode(root.right, key);
             }
@@ -139,7 +139,6 @@ class Treap {
      * Imprime le contenu des noeuds de l'arbre en notation préfixe.
      * @param root racine de l'arbre
      */
-
     public static void printPreorder(TreapNode root) {
         if (root == null)
             return;
