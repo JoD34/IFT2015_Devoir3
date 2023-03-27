@@ -135,6 +135,11 @@ class Treap {
         return root;
     }
 
+    /**
+     * Imprime le contenu des noeuds de l'arbre en notation préfixe.
+     * @param root racine de l'arbre
+     */
+
     public static void printPreorder(TreapNode root) {
         if (root == null)
             return;
