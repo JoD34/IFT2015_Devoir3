@@ -56,6 +56,30 @@ public class Main {
             System.out.println("_________________________");
         }
 
+        // Partie Caro
+        Treap arbre = new Treap();
+        TreapNode noeud = new TreapNode(13);
+        TreapNode racine1 = new TreapNode(0);
+        TreapNode racine2 = new TreapNode(0);
+        TreapNode racine3 = new TreapNode(0);
+        TreapNode racine4 = new TreapNode(0);
+        TreapNode racine5 = new TreapNode(0);
+        TreapNode racine6 = new TreapNode(0);
+        TreapNode racine7 = new TreapNode(0);
+
+        racine1 = arbre.insertNode(noeud, 10);
+        racine2 = arbre.insertNode(racine1, 5);
+        racine3 = arbre.insertNode(racine2, 12);
+        racine4 = arbre.insertNode(racine3, 11);
+        racine5 = arbre.insertNode(racine4, 25);
+        racine6 = arbre.insertNode(racine5, 14);
+        racine7 = arbre.insertNode(racine6, 28);
+
+        arbre.printPreorder(racine7);
+        System.out.println();
+        //System.out.println(arbre.searchNode(racine2, 99));
+        arbre.printPreorder(arbre.deleteNode(racine7, 11));
+
     }
     public static void addNodes(int[] listVal, Node list){
         for (int i = 1; i < listVal.length;i++){
