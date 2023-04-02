@@ -99,24 +99,8 @@ public class MinPriorityQueueUsingBST {
      */
     public void transplant(Node u, Node v) {
         v.setP(u.getP());
-       /* if (v == u.getRight()) {
-            if (u.getLeft() != null) {
-                while (v.getLeft() != null) v = v.getLeft(); // Is this necessary ?
-                v.setLeft(u.getLeft());
-                u.getLeft().setP(v);
-            }
-        }
-
-        else{
-            if (u.getRight() != null) {
-                while (v.getRight() != null) v = v.getRight(); // Is this necessary ?
-                v.setRight(u.getRight());
-                u.getRight().setP(v);
-            }
-        }*/
         if (u == u.getP().getLeft()) u.getP().setLeft(v);
         else u.getP().setRight(v);
-        updateMinNode(getRoot());
     }
 
     /**
@@ -133,7 +117,6 @@ public class MinPriorityQueueUsingBST {
     }
 
     public Node extractMinEfficient(Node z) {
-        //Node Head= new Node(1,1); What is this for?
 
         // Si l'arbre est null.
         if (z == null) return z;
