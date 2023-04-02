@@ -30,11 +30,13 @@ public class Main {
             n = n.next;
         }
 
+        // Initier l'arbre binaire
         int[] listKeys ={10,5,7,6,3,2,8,9,15,13,12,14,17,16,18};
         MinPriorityQueueUsingBST a = new MinPriorityQueueUsingBST();
         a.setRootKey(listKeys[0]);
-        for (int i=1;i<listKeys.length;i++)a.addMeBaby(listKeys[i],a.getRoot());
+        for (int i=1;i < listKeys.length;i++)a.addMeBaby(listKeys[i],a.getRoot());
         a.printPreorder(a.getRoot());
+        a.updateMinNode(a.getRoot());
         System.out.println();
 
         MinPriorityQueueUsingBST.Node found = a.getRoot().findMeBaby(7);
@@ -55,6 +57,12 @@ public class Main {
             System.out.println();
             System.out.println("_________________________");
         }
+
+        System.out.println("Problem try");
+        int[] array = {4,3,2,6};
+        System.out.println(Problem.calculateCost(array));
+        System.out.println("_________________________");
+
 
         // Partie Caro
         Treap arbre = new Treap();

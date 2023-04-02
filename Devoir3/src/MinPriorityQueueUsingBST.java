@@ -26,6 +26,8 @@ public class MinPriorityQueueUsingBST {
 
         public int getKey() {return key;}
 
+        public int getSize() {return size;}
+
         public void setMin(Node min) {
             this.min = min;
         }
@@ -43,9 +45,7 @@ public class MinPriorityQueueUsingBST {
             if(this.key == key) return this;
             if (key < this.key) return this.getLeft().findMeBaby(key);
             else return this.getRight().findMeBaby(key);
-
         }
-
     }
 
     public MinPriorityQueueUsingBST() {
@@ -99,7 +99,7 @@ public class MinPriorityQueueUsingBST {
      */
     public void transplant(Node u, Node v) {
         v.setP(u.getP());
-        if (v == u.getRight()) {
+       /* if (v == u.getRight()) {
             if (u.getLeft() != null) {
                 while (v.getLeft() != null) v = v.getLeft(); // Is this necessary ?
                 v.setLeft(u.getLeft());
@@ -113,7 +113,7 @@ public class MinPriorityQueueUsingBST {
                 v.setRight(u.getRight());
                 u.getRight().setP(v);
             }
-        }
+        }*/
         if (u == u.getP().getLeft()) u.getP().setLeft(v);
         else u.getP().setRight(v);
         updateMinNode(getRoot());
@@ -134,16 +134,27 @@ public class MinPriorityQueueUsingBST {
 
     public Node extractMinEfficient(Node z) {
         //Node Head= new Node(1,1); What is this for?
+
+        // Si l'arbre est null.
         if (z == null) return z;
         Node min = z.getMin();
+        // Si z est la root.
         if (min.getP() == null) {
-            if (getRoot().getRight() == null) {setRoot(null);}
-            else {setRoot(getRoot().getRight());
-            getRoot().setP(null);}
+            if (getRoot().getRight() == null) setRoot(null);
+            else {
+                setRoot(getRoot().getRight());
+                getRoot().setP(null);
+            }
         }
+        // Si le noeud minimum possède un enfant droit.
         else if (min.getRight() != null) transplant(min, min.getRight());
+        // Si le min est une feuille gauche.
         else min.getP().setLeft(null);
-        if(getRoot() != null) updateMinNode(getRoot());
+        // Modifier le min de z.
+        if(getRoot() != z.getMin()){
+            if(min.getRight()== null) z.setMin(min.getP());
+            else z.setMin(min.getRight().getMin());
+        }
         return min;
     }
 }
